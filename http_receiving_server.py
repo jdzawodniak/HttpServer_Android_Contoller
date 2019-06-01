@@ -5,8 +5,11 @@
 ################################
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
+item = None
+
 class RequestHandler_httpd(BaseHTTPRequestHandler):
   def do_GET(self):
+    global item
     messagetosend = bytes('Receive query',"utf")
     self.send_response(200)
     self.send_header('Content-Type', 'text/plain')
@@ -14,6 +17,7 @@ class RequestHandler_httpd(BaseHTTPRequestHandler):
     self.end_headers()
     self.wfile.write(messagetosend)
     print(self.requestline)
+    print(item.text)
     return
 
 
