@@ -7,13 +7,12 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 
 QueryString = None
 x = None
-y = None
 list2 = None
 i = None
 
 class RequestHandler_httpd(BaseHTTPRequestHandler):
   def do_GET(self):
-    global QueryString, x, y, list2, i
+    global QueryString, x, list2, i
     messagetosend = bytes('Getting Query String',"utf")
     self.send_response(200)
     self.send_header('Content-Type', 'text/plain')
@@ -25,9 +24,8 @@ class RequestHandler_httpd(BaseHTTPRequestHandler):
     print(QueryString)
     print('Loop through list')
     x = QueryString
-    y = x.split(',')
     list2 = x.split(',')
-    for i in range(1, 6):
+    for i in range(1, 11):
       print(i)
       print(list2[int(i - 1)])
     return
