@@ -11,15 +11,15 @@ text = None
 class RequestHandler_httpd(BaseHTTPRequestHandler):
   def do_GET(self):
     global QueryString, text
+    QueryString = self.requestline
+    QueryString = text[5 : int(len(text)-9)]
+    print(QueryString)
     messagetosend = bytes('Welcome to the HTTP Server',"utf")
     self.send_response(200)
     self.send_header('Content-Type', 'text/plain')
     self.send_header('Content-Length', len(messagetosend))
     self.end_headers()
     self.wfile.write(messagetosend)
-    QueryString = self.requestline
-    QueryString = text[5 : int(len(text)-9)]
-    print(QueryString)
     return
 
 
