@@ -6,14 +6,16 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 QueryString = None
-text = None
 
 class RequestHandler_httpd(BaseHTTPRequestHandler):
   def do_GET(self):
-    global QueryString, text
+    global QueryString
     QueryString = self.requestline
-    QueryString = text[5 : int(len(text)-9)]
+    QueryString = QueryString[5 : int(len(QueryString) - 9)]
+    print('You got a request')
     print(QueryString)
+    print('From')
+    print(self.client_address)
     messagetosend = bytes('Welcome to the HTTP Server',"utf")
     self.send_response(200)
     self.send_header('Content-Type', 'text/plain')
