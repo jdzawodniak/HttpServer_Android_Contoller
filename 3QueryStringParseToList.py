@@ -4,6 +4,7 @@
 ##Web site: easycoding.tn     ##
 ################################
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import time
 
 QueryString = None
 querystringlist = None
@@ -22,6 +23,7 @@ class RequestHandler_httpd(BaseHTTPRequestHandler):
     self.end_headers()
     self.wfile.write(messagetosend)
     querystringlist = QueryString.split(',')
+    time.sleep(20)
     for i in range(1, 7):
       print(i)
       print(QueryString[int(i - 1)])
