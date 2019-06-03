@@ -12,7 +12,6 @@ class RequestHandler_httpd(BaseHTTPRequestHandler):
     global QueryString
     QueryString = self.requestline
     QueryString = QueryString[5 : int(len(QueryString) - 9)]
-    print('You got a request')
     print(QueryString)
     messagetosend = bytes(QueryString,"utf")
     self.send_response(200)
