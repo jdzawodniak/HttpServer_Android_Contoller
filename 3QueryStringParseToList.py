@@ -5,13 +5,13 @@
 ################################
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-querystringlist = None
 QueryString = None
+querystringlist = None
 i = None
 
 class RequestHandler_httpd(BaseHTTPRequestHandler):
   def do_GET(self):
-    global querystringlist, QueryString, i
+    global QueryString, querystringlist, i
     QueryString = self.requestline
     QueryString = QueryString[5 : int(len(QueryString) - 9)]
     print(QueryString)
@@ -21,6 +21,10 @@ class RequestHandler_httpd(BaseHTTPRequestHandler):
     self.send_header('Content-Length', len(messagetosend))
     self.end_headers()
     self.wfile.write(messagetosend)
+    querystringlist = QueryString.split(',')
+    for i in range(1, 7):
+      print(i)
+      print(QueryString[int(i - 1)])
     return
 
 
@@ -28,8 +32,3 @@ server_address_httpd = ('192.168.86.54',8080)
 httpd = HTTPServer(server_address_httpd, RequestHandler_httpd)
 print('Starting Server')
 httpd.serve_forever()
-
-querystringlist = QueryString.split(',')
-for i in range(1, 7):
-  print(i)
-  print(QueryString[int(i - 1)])
