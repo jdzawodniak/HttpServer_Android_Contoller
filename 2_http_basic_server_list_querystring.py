@@ -14,9 +14,7 @@ class RequestHandler_httpd(BaseHTTPRequestHandler):
     QueryString = QueryString[5 : int(len(QueryString) - 9)]
     print('You got a request')
     print(QueryString)
-    print('From')
-    print(self.client_address)
-    messagetosend = bytes('Welcome to the HTTP Server',"utf")
+    messagetosend = bytes(QueryString,"utf")
     self.send_response(200)
     self.send_header('Content-Type', 'text/plain')
     self.send_header('Content-Length', len(messagetosend))
