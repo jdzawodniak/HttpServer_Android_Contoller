@@ -6,19 +6,20 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 QueryString = None
-i = None
 querystringlist = None
+i = None
 list2 = None
 
 class RequestHandler_httpd(BaseHTTPRequestHandler):
   def do_GET(self):
-    global QueryString, i, querystringlist, list2
+    global QueryString, querystringlist, i, list2
     QueryString = self.requestline
     QueryString = QueryString[5 : int(len(QueryString) - 9)]
     print(QueryString)
+    querystringlist = QueryString.split(',')
     for i in range(1, 7):
-      querystringlist = QueryString.split(',')
-      print(str(i) + str(list2[int(i - 1)]))
+      print(i)
+      print(list2[int(i - 1)])
     messagetosend = bytes(QueryString,"utf")
     self.send_response(200)
     self.send_header('Content-Type', 'text/plain')
