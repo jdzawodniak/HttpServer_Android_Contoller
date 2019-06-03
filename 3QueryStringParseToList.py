@@ -4,33 +4,36 @@
 ##Web site: easycoding.tn     ##
 ################################
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import time
 
 QueryString = None
-querystringlist = None
+x = None
+y = None
+list2 = None
 i = None
 
 class RequestHandler_httpd(BaseHTTPRequestHandler):
   def do_GET(self):
-    global QueryString, querystringlist, i
-    QueryString = self.requestline
-    QueryString = QueryString[5 : int(len(QueryString) - 9)]
-    print(QueryString)
-    messagetosend = bytes('Processing Query String',"utf")
+    global QueryString, x, y, list2, i
+    messagetosend = bytes('Getting Query String',"utf")
     self.send_response(200)
     self.send_header('Content-Type', 'text/plain')
     self.send_header('Content-Length', len(messagetosend))
     self.end_headers()
     self.wfile.write(messagetosend)
-    querystringlist = QueryString.split(',')
-    time.sleep(20)
-    for i in range(1, 7):
+    QueryString = self.requestline
+    QueryString = QueryString[5 : int(len(QueryString)-9)]
+    print(QueryString)
+    print('Loop through list')
+    x = QueryString
+    y = x.split(',')
+    list2 = x.split(',')
+    for i in range(1, 6):
       print(i)
-      print(QueryString[int(i - 1)])
+      print(list2[int(i - 1)])
     return
 
 
 server_address_httpd = ('192.168.86.54',8080)
 httpd = HTTPServer(server_address_httpd, RequestHandler_httpd)
-print('Starting Server')
+print('Server Started')
 httpd.serve_forever()
