@@ -34,7 +34,7 @@ class RequestHandler_httpd(BaseHTTPRequestHandler):
       print(i)
       print(list2[int(i - 1)])
       servo1.start(10)
-      dutyCycle = ((float((list2[int(i - 1)])) * 0.01) + 0.5) * 10
+      dutyCycle = ((float((int((list2[int(i - 1)])))) * 0.01) + 0.5) * 10
       servo1.ChangeDutyCycle(dutyCycle)
     GPIO.cleanup()
     return
