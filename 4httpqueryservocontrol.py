@@ -3,8 +3,9 @@
 ##    with   EasyPython       ##
 ##Web site: easycoding.tn     ##
 ################################
-from http.server import BaseHTTPRequestHandler, HTTPServer
 import RPi.GPIO as GPIO
+import time
+from http.server import BaseHTTPRequestHandler, HTTPServer
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(13, GPIO.OUT)
@@ -12,11 +13,10 @@ servo1= GPIO.PWM(13, 100)
 QueryString = None
 x = None
 list2 = None
-i = None
 
 class RequestHandler_httpd(BaseHTTPRequestHandler):
   def do_GET(self):
-    global QueryString, x, list2, i
+    global QueryString, x, list2
     messagetosend = bytes('Getting Query String',"utf")
     self.send_response(200)
     self.send_header('Content-Type', 'text/plain')
@@ -30,12 +30,22 @@ class RequestHandler_httpd(BaseHTTPRequestHandler):
     print('Loop through list')
     x = QueryString
     list2 = x.split(',')
-    for i in range(1, 6):
-      print(i)
-      print(list2[int(i - 1)])
-      servo1.start(10)
-      dutyCycle = ((float((int((list2[int(i - 1)])))) * 0.01) + 0.5) * 10
-      servo1.ChangeDutyCycle(dutyCycle)
+    servo1.start(10)
+    print(list2[int((int('1')) - 1)])
+    dutyCycle = ((float((int((list2[int((int('1')) - 1)])))) * 0.01) + 0.5) * 10
+    servo1.ChangeDutyCycle(dutyCycle)
+    time.sleep(3)
+    print(list2[int((int('2')) - 1)])
+    dutyCycle = ((float((int((list2[int((int('2')) - 1)])))) * 0.01) + 0.5) * 10
+    servo1.ChangeDutyCycle(dutyCycle)
+    time.sleep(3)
+    print(list2[int((int('3')) - 1)])
+    dutyCycle = ((float((int((list2[int((int('2')) - 1)])))) * 0.01) + 0.5) * 10
+    servo1.ChangeDutyCycle(dutyCycle)
+    time.sleep(3)
+    dutyCycle = ((float((int((int('0'))))) * 0.01) + 0.5) * 10
+    servo1.ChangeDutyCycle(dutyCycle)
+    print('0')
     GPIO.cleanup()
     return
 
