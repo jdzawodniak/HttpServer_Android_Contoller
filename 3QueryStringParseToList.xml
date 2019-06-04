@@ -1,0 +1,188 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="7n$n/gNAtm]P9-?CjC^h">QueryString</variable>
+    <variable type="" id=";iXPkPGr,|jdhEEnE^8U">x</variable>
+    <variable type="" id="TojK#*HD6[mYRNuVfVkQ">list</variable>
+    <variable type="" id="zS^yLoh{nb6mDe3)p36K">i</variable>
+  </variables>
+  <block type="httpserver_startserver" id="qoL6CR=nVVpVyTLce#Wo" x="-662" y="12">
+    <field name="ServerName">httpd</field>
+    <value name="address">
+      <block type="text" id="i/GEByE~D{~Xz_A}etvv">
+        <field name="TEXT">192.168.86.54</field>
+      </block>
+    </value>
+    <value name="Port">
+      <block type="math_number" id="tBU2[)Ivxe%pKHT9-?-4">
+        <field name="NUM">8080</field>
+      </block>
+    </value>
+    <next>
+      <block type="text_print" id="F]$Hs@rXV$SK8ex-xj9i">
+        <value name="TEXT">
+          <shadow type="text" id="]L)?:8CP]srv.vS-^1j?">
+            <field name="TEXT">Server Started</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="httpserver_serve_forever" id="NK=o-t:n@vhwgotOR,ZQ">
+            <field name="ServerName">httpd</field>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+  <block type="httpserver_answerhandler" id="C$X}@sau%^*^.v/4D`pH" x="-112" y="12">
+    <field name="ServerName">httpd</field>
+    <statement name="NAME">
+      <block type="httpserver_answertorequest" id="~dMl=/6eqXuE?/kFg[)%">
+        <value name="lemssage">
+          <block type="text" id="q[3a[UxrEL?mu#PIVVa|">
+            <field name="TEXT">Getting Query String</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="1XG_P%J~6kPi$MJF*-sM">
+            <field name="VAR" id="7n$n/gNAtm]P9-?CjC^h" variabletype="">QueryString</field>
+            <value name="VALUE">
+              <block type="httpserver_info" id="c3jPvW}{PV-$5M7zt+T`">
+                <field name="info">requestline</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="LLu,3pgkz@ZNYl0iGJb4">
+                <field name="VAR" id="7n$n/gNAtm]P9-?CjC^h" variabletype="">QueryString</field>
+                <value name="VALUE">
+                  <block type="text_clearhttprequestinserver" id="v8KU._~FwijPz!,$TAD{">
+                    <value name="MyTextVar">
+                      <block type="variables_get" id="zCClSWa,aQYs60HCAD?A">
+                        <field name="VAR" id="7n$n/gNAtm]P9-?CjC^h" variabletype="">QueryString</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_print" id="=2a$?V@8I64}o7x)C}aA">
+                    <value name="TEXT">
+                      <shadow type="text" id="yBCz*P,h*{djS/TSwVFB">
+                        <field name="TEXT">Sting Prior to Loop</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="text_print" id=")GX9SIF8!|7|EcypnTKS">
+                        <value name="TEXT">
+                          <shadow type="text" id="(p,%i]Vrd)=P*HX{Q3l%">
+                            <field name="TEXT">abc</field>
+                          </shadow>
+                          <block type="variables_get" id="j3~89/3aDczcg#OwHP7f">
+                            <field name="VAR" id="7n$n/gNAtm]P9-?CjC^h" variabletype="">QueryString</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="text_print" id="]Z2k3t~L^msq)aI?gtLp">
+                            <value name="TEXT">
+                              <shadow type="text" id="(p,%i]Vrd)=P*HX{Q3l%">
+                                <field name="TEXT">Loop through list</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="variables_set" id="xX9tQBkB#X?rhL#LS#7b">
+                                <field name="VAR" id=";iXPkPGr,|jdhEEnE^8U" variabletype="">x</field>
+                                <value name="VALUE">
+                                  <block type="variables_get" id="a}IH^?Q^42+D|bR-y[Kz">
+                                    <field name="VAR" id="7n$n/gNAtm]P9-?CjC^h" variabletype="">QueryString</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="variables_set" id="Fjfz,8,lnJ)+JBEOUuaF">
+                                    <field name="VAR" id="TojK#*HD6[mYRNuVfVkQ" variabletype="">list</field>
+                                    <value name="VALUE">
+                                      <block type="lists_split" id="zA+=9BfHj{Dh2RNE*,5c">
+                                        <mutation mode="SPLIT"></mutation>
+                                        <field name="MODE">SPLIT</field>
+                                        <value name="INPUT">
+                                          <block type="variables_get" id="{4uQ7KusI(8t6q$^{HFI">
+                                            <field name="VAR" id=";iXPkPGr,|jdhEEnE^8U" variabletype="">x</field>
+                                          </block>
+                                        </value>
+                                        <value name="DELIM">
+                                          <shadow type="text" id="MRo;dwZj/f:gnlDGfF:E">
+                                            <field name="TEXT">,</field>
+                                          </shadow>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="controls_for" id="eQ[g9i{.)a7uG[#xOe:!">
+                                        <field name="VAR" id="zS^yLoh{nb6mDe3)p36K" variabletype="">i</field>
+                                        <value name="FROM">
+                                          <shadow type="math_number" id=";3Ha4:hlto|f|tb}p5vd">
+                                            <field name="NUM">1</field>
+                                          </shadow>
+                                        </value>
+                                        <value name="TO">
+                                          <shadow type="math_number" id="D:xv2|k-p]Sg%5.2Y;|4">
+                                            <field name="NUM">5</field>
+                                          </shadow>
+                                        </value>
+                                        <value name="BY">
+                                          <shadow type="math_number" id="9S8h~]^rO6w6FWU)g1%=">
+                                            <field name="NUM">1</field>
+                                          </shadow>
+                                        </value>
+                                        <statement name="DO">
+                                          <block type="text_print" id="hWLVC6QPL0KgZ3f^E#*?">
+                                            <value name="TEXT">
+                                              <shadow type="text" id="n#d;N5B9r!gU(Te8eO/R">
+                                                <field name="TEXT">abc</field>
+                                              </shadow>
+                                              <block type="variables_get" id=")8OW,v$pt{{y4_eOoI+Q">
+                                                <field name="VAR" id="zS^yLoh{nb6mDe3)p36K" variabletype="">i</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="text_print" id="+a8`e.os6a=#7;hC0`?y">
+                                                <value name="TEXT">
+                                                  <shadow type="text" id="W4(VrYlr^MMyqZ5I/{sS">
+                                                    <field name="TEXT">abc</field>
+                                                  </shadow>
+                                                  <block type="lists_getIndex" id="g7j{Kdf.38fuV#D/mG^7">
+                                                    <mutation statement="false" at="true"></mutation>
+                                                    <field name="MODE">GET</field>
+                                                    <field name="WHERE">FROM_START</field>
+                                                    <value name="VALUE">
+                                                      <block type="variables_get" id="=C]n#}5djbT~=a~2oT?N">
+                                                        <field name="VAR" id="TojK#*HD6[mYRNuVfVkQ" variabletype="">list</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="AT">
+                                                      <block type="variables_get" id=":oidD~IV3Drh^brWIw2t">
+                                                        <field name="VAR" id="zS^yLoh{nb6mDe3)p36K" variabletype="">i</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
